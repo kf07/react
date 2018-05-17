@@ -1,21 +1,32 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
-  }
+const Child = (props) => (
+    <div onClick={props.handleClick}>
+        {props.data}
+    </div>
+);
+class App extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            value1: 'たける',
+            value2: [ 'bar', 'baz' ],
+        };
+        this.handleClick = this.handleClick.bind(this);
+    }
+
+    handleClick(){
+        this.setState(() => {
+            return { value1: 'たかし' };
+        });
+    }
+
+    render() {
+        return (
+            <div>
+                <Child data={this.state.value1} handleClick={this.handleClick} />
+            </div>
+        );
+    }
 }
-
 export default App;
