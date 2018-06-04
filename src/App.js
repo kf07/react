@@ -1,6 +1,4 @@
 import React, {Component} from 'react';
-import logo from './logo.svg';
-import testimg from './img/img01.jpg';
 
 class App extends Component {
     constructor(props) {
@@ -26,34 +24,29 @@ class App extends Component {
     }
 }
 
-class NameList extends  Component {
-    render(){
-        console.log(this.props.names)
-        return(
-        <div>
-            <NameItem names={this.props.names} />
-        </div>
+class NameList extends Component {
+    constructor(props) {
+        super(props);
+        this.handleClick = this.handleClick.bind(this);
+    }
+
+    handleClick() {
+        alert('ok')
+    }
+
+
+    render() {
+        return (
+            <ul>
+                <NameItem name={this.props.names} handleClick={this.handleClick} />
+            </ul>
         )
     }
 }
 
-const Item = ({name,id}) => (
-        <li>
-            NAME:{name} ID:{id}
-            <img src={testimg} alt="" />
-        </li>
+const NameItem = (props) => (
+    <li onClick={props.handleClick}>あああ{props.name[0].name}</li>
 );
-
-const NameItem = (props) => {
-    const test = props.names;
-    return (
-        <ul>
-            <Item name={test[0].name} id={test[0].id} />
-            <Item name={test[1].name} id={test[1].id} />
-        </ul>
-    )
-};
-
 
 
 export default App;
