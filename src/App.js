@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import './style.css';
+import img01 from './img/img01.jpg';
 
 class App extends Component {
     constructor(props) {
@@ -50,7 +51,6 @@ class SelectedList extends Component {
         const lists = this.props.names;
         const listLength = lists.length;
          for(let i=0; i<listLength; i++) {
-             console.log(lists[i].select);
              if(lists[i].select == 1) {
                  list.push(
                      <li>{lists[i].name}</li>
@@ -109,8 +109,10 @@ class NameItem extends Component {
     }
 
     render() {
+        const itemNum = this.props.count;
+        console.log(itemNum)
         return(
-            <li onClick={this.handleClick} className="select_list_item" data-number={[this.props.count]}><span className="item_text">{this.props.name[this.props.count].name}</span> </li>
+            <li onClick={this.handleClick} className="select_list_item" data-number={itemNum}><span className="item_text" data-number={itemNum}>{this.props.name[this.props.count].name} </span><img src={img01} data-number={itemNum} /></li>
         )
     }
 }
