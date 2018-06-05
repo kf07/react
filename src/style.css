@@ -1,0 +1,19 @@
+.select_list {
+    display: flex;
+    width: 800px;
+    margin: auto;
+    padding: 100px 0 0;
+}
+
+.select_list_item {
+    width: 400px;
+    text-align: center;
+    border: 1px solid #000;
+    min-height: 400px;
+    cursor: pointer;
+}
+
+.item_text {
+    padding: 5px;
+    display: block;
+}
