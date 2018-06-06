@@ -76,22 +76,15 @@ class NameList extends Component {
     selectItem(props){
         this.props.selectState(props);
         let countinc = this.state.count;
-        countinc = countinc + 2;
+        countinc = countinc + 1;
         this.setState({count:countinc})
     }
 
     render() {
-        const list = [];
         let count = this.state.count;
-        for (let i = 0; i < 2; i++) {
-            list.push(
-                <NameItem count={count} name={this.props.names} selectItem={this.selectItem}/>
-            );
-            count++;
-        }
         return (
             <ul className="select_list">
-                {list}
+                <NameItem count={count} name={this.props.names} selectItem={this.selectItem}/>
             </ul>
         )
     }
@@ -110,7 +103,6 @@ class NameItem extends Component {
 
     render() {
         const itemNum = this.props.count;
-        console.log(itemNum)
         return(
             <li onClick={this.handleClick} className="select_list_item" data-number={itemNum}><span className="item_text" data-number={itemNum}>{this.props.name[this.props.count].name} </span><img src={img01} data-number={itemNum} /></li>
         )
