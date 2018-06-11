@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import './style.css';
+import img from './img/img01.jpg'
 
 class App extends Component {
     constructor(props) {
@@ -25,7 +26,9 @@ class App extends Component {
             count: 0,
         };
         this.select = this.select.bind(this);
+        this.onDelete = this.onDelete.bind(this);
     }
+
     select(props){
         const value = (props);
         const count = this.state.count;
@@ -46,12 +49,21 @@ class App extends Component {
         }
     }
 
+    onDelete(props) {
+       const deleteNum = (props);
+        const names_copy = this.state.names.slice();
+        names_copy[deleteNum].select = '0';
+       this.setState({
+           names:names_copy
+       })
+    }
+
     render() {
         return (
             <div className="wrapper">
                 <SelectList name={this.state.names[this.state.count]} />
                 <SelectBtns select={this.select} />
-                <NameList name={this.state.names} />
+                <NameList name={this.state.names} onDelete={this.onDelete} />
             </div>
         )
     }
@@ -92,19 +104,38 @@ class SelectBtns extends Component{
 }
 
 
-const NameList = (props) => {
-    const list = [];
-    const lists = props.name;
-    const listLength = lists.length;
-    for (let i = 0; i < listLength; i++) {
-        if (lists[i].select === '1') {
-            list.push(
-                <li key={i}>{lists[i].name}</li>
-            )
+class NameList extends Component {
+    constructor() {
+        super();
+        this.handleDelete = this.handleDelete.bind(this);
+    }
+
+    handleDelete(e) {
+        const deleteNum = e.target.getAttribute('data-number');
+        if ( window.confirm('けしますか？')) {
+            this.props.onDelete(deleteNum);
+        }else {
+
         }
     }
-    return (
-        <p>{list}</p>
-    )
+
+    render() {
+        const list = [];
+        const lists = this.props.name;
+        const listLength = lists.length;
+        for (let i = 0; i < listLength; i++) {
+            if (lists[i].select === '1') {
+                list.push(
+                    <li key={i}>{lists[i].name}
+                        <button type="button" onClick={this.handleDelete} data-number={i}>けす</button>
+                    </li>
+                )
+            }
+        }
+        return (
+            <ul className="selectList"><img src={img} alt="" />{list}</ul>
+        )
+    }
 }
+
 export default App;
